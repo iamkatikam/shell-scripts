@@ -9,5 +9,5 @@ echo "The home directory of the user is: $HOME"
 echo "The script execution user is: $USER"
 sleep 10 &
 echo "PID of most recently backgrounded process is: $!"
-echo "The last command executed was: $?"
+#echo "The last command executed was: $?"
 echo "All the arguments passed to the script are: $*"
