@@ -1,7 +1,7 @@
 #!/bin/bash
 
-NUMBER1=30
-NUMBER2=20
+NUMBER1="abcd"
+NUMBER2="efgh"
 
 # Perform addition
 SUM=$((NUMBER1 + NUMBER2))
