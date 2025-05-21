@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 
 LOGS_DIR="/var/log/shell-scripts"
-SCRIPT_NAME=$(basename $0)
+SCRIPT_NAME=$(echo $0 | cut -d'.' -f1)
 echo -e "$G The name of the script is: $SCRIPT_NAME $N"
 LOG_FILE="$LOGS_DIR/$SCRIPT_NAME.log"
 
