@@ -7,18 +7,42 @@ if [ $userid -ne 0 ]; then
     else
     echo "You are running this script as root." 
 fi
-# This script will install the commands in the system
+
+VALIDATE()
+{
+    if [ $? -ne 0 ]; then
+        echo "Installing $2 is Successful."
+        else
+        echo "Installing $2 is not Successful."
+        exit 1
+    fi
+}
+# This script will install the mysql in the system
 dnf list installed mysql
 
 if [ $? -ne 0 ]; then
     echo "MySQL is not installed. Installing MySQL..."
     dnf install mysql -y
-    if [ $? -eq 0 ]; then
-        echo "MySQL installed successfully."
-    else
-        echo "Failed to install MySQL."
-        exit 1
-    fi
+    VALIDATE $? MySQL   
 else
     echo "MySQL is already installed."
+fi
+
+dnf list installed python3
+if [ $? -ne 0 ]; then
+    echo "Python3 is not installed. Installing Python3..."
+    dnf install python3 -y
+    VALIDATE $? Python3
+else
+    echo "Python3 is already installed."
+fi
+
+
+dnf list installed nginx
+if [ $? -ne 0 ]; then
+    echo "Nginx is not installed. Installing Nginx..."
+    dnf install nginx -y
+    VALIDATE $? Nginx 
+    else
+    echo "Nginx is already installed."
 fi
