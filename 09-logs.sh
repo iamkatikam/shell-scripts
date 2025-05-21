@@ -5,7 +5,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-LOGS_DIR="/var/logs/shell-scripts"
+LOGS_DIR="/var/log/shell-scripts"
 SCRIPT_NAME=$(basename $0)
 LOG_FILE="$LOGS_DIR/$SCRIPT_NAME.log"
 
