@@ -7,8 +7,15 @@ N="\e[0m"
 
 LOGS_DIR="/var/log/shell-scripts"
 SCRIPT_NAME=$(echo $0 | cut -d'.' -f1)
-echo -e "$G The name of the script is: $SCRIPT_NAME $N"
+echo -e "$G The name of the script is: $SCRIPT_NAME"
 LOG_FILE="$LOGS_DIR/$SCRIPT_NAME.log"
+echo -e "$G The log file is: $LOG_FILE $N"
+
+PACKAGES=(
+    "mysql"
+    "python3"
+    "nginx"
+)
 
 echo ""Script started at $(date)""  | tee -a $LOG_FILE
 
@@ -36,32 +43,19 @@ VALIDATE()
         exit 1
     fi
 }
+for package in ${PACKAGES[@]}
+
 # This script will install the mysql in the system
-dnf list installed mysql
-
+dnf list installed $package
 if [ $? -ne 0 ]; then
-    echo -e "MySQL is not installed. Installing MySQL..." | tee -a $LOG_FILE
-    dnf install mysql -y
-    VALIDATE $? MySQL   
+    echo -e "$G $package is not installed. Installing $package..." | tee -a $LOG_FILE
+    dnf install $package -y
+    VALIDATE $? $package   
 else
-    echo -e "$Y MySQL is already installed. $N" | tee -a $LOG_FILE
-fi
-
-dnf list installed python3
-if [ $? -ne 0 ]; then
-    echo "Python3 is not installed. Installing Python3..." | tee -a $LOG_FILE
-    dnf install python3 -y
-    VALIDATE $? Python3
-else
-    echo -e "$Y Python3 is already installed. $N" | tee -a $LOG_FILE
+    echo -e "$Y $package is already installed. $N" | tee -a $LOG_FILE
 fi
 
 
-dnf list installed nginx
-if [ $? -ne 0 ]; then
-    echo "Nginx is not installed. Installing Nginx..." | tee -a $LOG_FILE
-    dnf install nginx -y
-    VALIDATE $? Nginx 
-    else
-    echo -e "$Y Nginx is already installed. $N" | tee -a $LOG_FILE
-fi
+
+
+
