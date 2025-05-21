@@ -1,5 +1,12 @@
 #!/bin/bash
 
+userid=$(id -u)
+if [ $userid -ne 0 ]; then
+    echo "You need to run this script as root or with sudo."
+    exit 1
+    else
+    echo "You are running this script as root." 
+fi
 # This script will install the commands in the system
 dnf list installed mysql
 
