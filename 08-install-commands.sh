@@ -1,8 +1,14 @@
 #!/bin/bash
 
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
+
 userid=$(id -u)
 if [ $userid -ne 0 ]; then
-    echo "You need to run this script as root or with sudo."
+    echo -e "$R You need to run this script as root or with sudo. $N"
     exit 1
     else
     echo "You are running this script as root." 
@@ -11,9 +17,9 @@ fi
 VALIDATE()
 {
     if [ $? -ne 0 ]; then
-        echo "Installing $2 is Successful."
+        echo -e "$G Installing $2 is Successful. $N"
         else
-        echo "Installing $2 is not Successful."
+        echo -e "$R Installing $2 is not Successful. $N"
         exit 1
     fi
 }
@@ -21,11 +27,11 @@ VALIDATE()
 dnf list installed mysql
 
 if [ $? -ne 0 ]; then
-    echo "MySQL is not installed. Installing MySQL..."
+    echo -e "MySQL is not installed. Installing MySQL..."
     dnf install mysql -y
     VALIDATE $? MySQL   
 else
-    echo "MySQL is already installed."
+    echo "$Y MySQL is already installed. $N"
 fi
 
 dnf list installed python3
@@ -34,7 +40,7 @@ if [ $? -ne 0 ]; then
     dnf install python3 -y
     VALIDATE $? Python3
 else
-    echo "Python3 is already installed."
+    echo "$Y Python3 is already installed. $N"
 fi
 
 
@@ -44,5 +50,5 @@ if [ $? -ne 0 ]; then
     dnf install nginx -y
     VALIDATE $? Nginx 
     else
-    echo "Nginx is already installed."
+    echo "$Y Nginx is already installed. $N"
 fi
