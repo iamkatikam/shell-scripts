@@ -42,7 +42,8 @@ fi
 
 VALIDATE(){
     echo "++++++++"
-    if [ $1 -eq 0 ]; then
+    if [ $1 -eq 0 ]
+    then
         echo -e "$G Installing $2 is Successful. $N" &>> $LOG_FILE
     else
         echo -e "$R Installing $2 is not Successful. $N" &>> $LOG_FILE
