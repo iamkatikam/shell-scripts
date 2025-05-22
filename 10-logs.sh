@@ -42,7 +42,7 @@ fi
 
 VALIDATE()
 {
-    if [ $1 -ne 0 ]; then
+    if [ $1 -eq 0 ]; then
         echo -e "$G Installing $2 is Successful. $N" &>> $LOG_FILE
         else
         echo -e "$R Installing $2 is not Successful. $N" &>> $LOG_FILE
@@ -54,7 +54,7 @@ do
     dnf list installed $package &>> $LOG_FILE
     if [ $? -ne 0 ]; then
         echo -e "$package is not installed. Installing $package..." | tee -a $LOG_FILE
-        dnf install $package -y
+        dnf install $package -y &>> $LOG_FILE
         VALIDATE $? "$package"   
     else
         echo -e "$Y $package is already installed. $N" | tee -a $LOG_FILE
