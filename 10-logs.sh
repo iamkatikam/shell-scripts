@@ -19,6 +19,8 @@ PACKAGES=(
     "nginx"
     "httpd"
     "ansible"
+    "git"
+    "net-tools"
 )
 
 #echo ""Script started at $(date)""  | tee -a $LOG_FILE
