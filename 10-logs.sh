@@ -25,12 +25,12 @@ PACKAGES=(
 
 #echo ""Script started at $(date)""  | tee -a $LOG_FILE
 
-if [ ! -d $LOGS_DIR ]; then
-    mkdir $LOGS_DIR
-    echo -e "$G Created the logs directory. $N"  | tee -a $LOG_FILE
-else
-    echo -e "$Y Logs directory already exists. $N"  | tee -a $LOG_FILE
-fi
+# if [ ! -d $LOGS_DIR ]; then
+#     mkdir $LOGS_DIR
+#     echo -e "$G Created the logs directory. $N"  | tee -a $LOG_FILE
+# else
+#     echo -e "$Y Logs directory already exists. $N"  | tee -a $LOG_FILE
+# fi
 
 userid=$(id -u)
 if [ $userid -ne 0 ]; then
@@ -41,12 +41,11 @@ if [ $userid -ne 0 ]; then
 fi
 
 VALIDATE(){
-    echo "++++++++"
     if [ $1 -eq 0 ]
     then
-        echo -e "$G Installing $2 is Successful. $N" &>> $LOG_FILE
+        echo -e "$G Installing $2 is Successful. $N" &>>$LOG_FILE
     else
-        echo -e "$R Installing $2 is not Successful. $N" &>> $LOG_FILE
+        echo -e "$R Installing $2 is not Successful. $N" &>>$LOG_FILE
         exit 1
     fi
 }
@@ -56,8 +55,7 @@ do
     if [ $? -ne 0 ]; then
         echo -e "$package is not installed. Installing $package..." | tee -a $LOG_FILE
         dnf install $package -y &>>$LOG_FILE
-        VALIDATE $? "$package" 
-        echo "===========================" | tee -a $LOG_FILE
+        VALIDATE $? "$package"
     else
         echo -e "$Y $package is already installed. $N" | tee -a $LOG_FILE
     fi
