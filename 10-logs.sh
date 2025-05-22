@@ -6,10 +6,14 @@ Y="\e[33m"
 N="\e[0m"
 
 LOGS_DIR="/var/log/shell-scripts"
-SCRIPT_NAME=$(echo $0 | cut -d'.' -f1)
+SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
 echo -e "$G The name of the script is: $SCRIPT_NAME"
 LOG_FILE="$LOGS_DIR/$SCRIPT_NAME.log"
 echo -e "$G The log file is: $LOG_FILE $N"
+mkdir -p $LOGS_DIR
+echo "script started at $(date)"  | tee -a $LOG_FILE
+
+
 
 PACKAGES=(
     "mysql"
@@ -47,7 +51,7 @@ for package in ${PACKAGES[@]}
 do
     dnf list installed $package &>> $LOG_FILE
     if [ $? -ne 0 ]; then
-        echo -e "$G $package is not installed. Installing $package..." | tee -a $LOG_FILE
+        echo -e "$package is not installed. Installing $package..." | tee -a $LOG_FILE
         dnf install $package -y &>> $LOG_FILE
         VALIDATE $? $package   
     else
