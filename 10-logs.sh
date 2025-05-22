@@ -49,9 +49,10 @@ VALIDATE(){
         exit 1
     fi
 }
-for package in ${PACKAGES[@]}
+#for package in ${PACKAGES[@]}
+for package in $@
 do
-    dnf list installed $package &>> $LOG_FILE
+    dnf list installed $package &>>$LOG_FILE
     if [ $? -ne 0 ]; then
         echo -e "$package is not installed. Installing $package..." | tee -a $LOG_FILE
         dnf install $package -y &>>$LOG_FILE
