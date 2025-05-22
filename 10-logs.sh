@@ -40,11 +40,10 @@ if [ $userid -ne 0 ]; then
     echo "You are running this script as root." &>> $LOG_FILE
 fi
 
-VALIDATE()
-{
+VALIDATE(){
     if [ $1 -eq 0 ]; then
         echo -e "$G Installing $2 is Successful. $N" &>> $LOG_FILE
-        else
+    else
         echo -e "$R Installing $2 is not Successful. $N" &>> $LOG_FILE
         exit 1
     fi
