@@ -13,15 +13,15 @@ echo -e "$G The log file is: $LOG_FILE $N"
 mkdir -p $LOGS_DIR
 echo "script started at $(date)"  | tee -a $LOG_FILE
 
-
-
 PACKAGES=(
     "mysql"
     "python3"
     "nginx"
+    "httpd"
+    "ansible"
 )
 
-echo ""Script started at $(date)""  | tee -a $LOG_FILE
+#echo ""Script started at $(date)""  | tee -a $LOG_FILE
 
 if [ ! -d $LOGS_DIR ]; then
     mkdir $LOGS_DIR
