@@ -41,6 +41,7 @@ if [ $userid -ne 0 ]; then
 fi
 
 VALIDATE(){
+    echo "++++++++"
     if [ $1 -eq 0 ]; then
         echo -e "$G Installing $2 is Successful. $N" &>> $LOG_FILE
     else
@@ -53,8 +54,9 @@ do
     dnf list installed $package &>> $LOG_FILE
     if [ $? -ne 0 ]; then
         echo -e "$package is not installed. Installing $package..." | tee -a $LOG_FILE
-        dnf install $package -y &>> $LOG_FILE
-        VALIDATE $? "$package"   
+        dnf install $package -y &>>$LOG_FILE
+        VALIDATE $? "$package" 
+        echo "===========================" | tee -a $LOG_FILE
     else
         echo -e "$Y $package is already installed. $N" | tee -a $LOG_FILE
     fi
